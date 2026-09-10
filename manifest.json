@@ -1,6 +1,6 @@
 {
-  "name": "BiN32.com App",
-  "short_name": "BiN32.com",
+  "name": "OBAKEE App",
+  "short_name": "OBAKEE",
   "start_url": "/app/",
   "display": "standalone",
   "background_color": "#ffffff",
