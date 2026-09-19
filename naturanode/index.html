@@ -19,26 +19,20 @@
     <link rel="android-chrome-192x192" href="/favicon.webp" sizes="192x192">
   </head>
   <body>
-    <center>
-      <div class="ren-box">
-        <a href="/">
-          <img src="/Banner.webp" border="0" alt="OBAKEE" oncontextmenu="return false;">
-        </a>
-        <br>
-        <a href="https://www.curseforge.com/minecraft/mc-mods/naturanode" target='_blank'>
-          <button>
-            <h2>Curseforge</h2>
-          </button>
-        </a>
-        <a href="https://github.com/AiryBubble/NaturaNode/blob/main/LICENSE.txt" target='_blank'>
-          <button>
-            <h2>MOD License(MIT)</h2>
-          </button>
-        </a>
-        </div>
-        <h6>
-          <a href="https://github.com/AiryBubble/OBAKEE/blob/main/LICENSE">MIT License.</a>, (C) AiryBubble.
-        </h6>
-      </div>
-    </center>
+    <main class="app-shell">
+      <header class="app-header">
+        <a href="/" aria-label="OBAKEE ホーム"><img src="/Banner.webp" alt="OBAKEE"></a>
+        <a class="back-link" href="/">ホームへ戻る</a>
+      </header>
+      <section class="app-intro" aria-labelledby="naturanode-title">
+        <h1 id="naturanode-title">NaturaNode</h1>
+        <p>Minecraft向けModの配布情報とライセンスをご案内します。</p>
+      </section>
+      <nav class="tool-grid" aria-label="NaturaNode のリンク">
+        <a class="tool-card" href="https://www.curseforge.com/minecraft/mc-mods/naturanode" target="_blank" rel="noopener noreferrer"><strong>CurseForge</strong><span>Modの配布ページを開く</span><em aria-hidden="true">開く ↗</em></a>
+        <a class="tool-card" href="https://github.com/AiryBubble/NaturaNode/blob/main/LICENSE.txt" target="_blank" rel="noopener noreferrer"><strong>MOD License</strong><span>MIT Licenseを確認する</span><em aria-hidden="true">開く ↗</em></a>
+      </nav>
+      <footer class="app-footer"><a href="https://github.com/AiryBubble/OBAKEE/blob/main/LICENSE">MIT License</a> · © AiryBubble</footer>
+    </main>
+  </body>
 </html>

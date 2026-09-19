@@ -4,28 +4,6 @@
     <meta charset="UTF-8">
     <title>OBAKEE アプリ</title>
     <link rel="stylesheet" href="/style.css">
-    <style>
-      \
- .upbar a {
-        text-decoration: none;
-      }
-
-      .upbar button {
-        margin: .3rem;
-        padding: .5rem 1rem;
-      }
-
-      #iframe-wrapper {
-        margin-top: 1rem;
-        display: none;
-      }
-
-      #iframe-wrapper iframe {
-        width: 100%;
-        height: 500px;
-        border: none;
-      }
-    </style>
     <link rel="manifest" href="/manifest.json">
     <script>
       if ("serviceWorker" in navigator) {
@@ -59,70 +37,25 @@
     <link rel="android-chrome-192x192" href="/favicon.webp" sizes="192x192">
   </head>
   <body>
-    <center>
-      <div class="ren-box">
-        <a href="/">
-          <img src="/Banner.webp" border="0" alt="OBAKEE" oncontextmenu="return false;">
-        </a>
-        <br>
-        <div class="upbar">
-          <a href="pwgen" class="ajax-link">
-            <button>
-              <h2>パスワードジェネレーター</h2>
-            </button>
-          </a>
-          <a href="uidgen" class="ajax-link">
-            <button>
-              <h2>UIDジェネレーター</h2>
-            </button>
-          </a>
-          <a href="qrgen" class="ajax-link">
-            <button>
-              <h2>QRジェネレーター</h2>
-            </button>
-          </a>
-          <a href="pngedit" class="ajax-link">
-            <button>
-              <h2>PNG簡易編集</h2>
-            </button>
-          </a>
-          <a href="webrtc" class="ajax-link">
-            <button>
-              <h2>WebRTC判定</h2>
-            </button>
-          </a>
-          <a href="hookdel" class="ajax-link">
-            <button>
-              <h2>Webhook削除</h2>
-            </button>
-          </a>
-          <a href="twmr" class="ajax-link">
-            <button>
-              <h2>不可視文字除去</h2>
-            </button>
-          </a>
-        </div>
-        <div id="iframe-wrapper"></div>
-        <h6>
-          <a href="https://github.com/AiryBubble/OBAKEE/blob/main/LICENSE">MIT License.</a>, (C) AiryBubble.
-        </h6>
-      </div>
-    </center>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const wrapper = document.getElementById('iframe-wrapper');
-        document.querySelectorAll('a.ajax-link').forEach(link => {
-          link.addEventListener('click', e => {
-            e.preventDefault();
-            const url = link.getAttribute('href');
-            wrapper.innerHTML = '';
-            const iframe = document.createElement('iframe');
-            iframe.src = url;
-            iframe.loading = 'lazy';
-            wrapper.appendChild(iframe);
-            wrapper.style.display = 'block';
-          });
-        });
-      });
-    </script>
+    <main class="app-shell">
+      <header class="app-header">
+        <a href="/" aria-label="OBAKEE ホーム"><img src="/Banner.webp" alt="OBAKEE"></a>
+        <a class="back-link" href="/">ホームへ戻る</a>
+      </header>
+      <section class="app-intro" aria-labelledby="app-title">
+        <h1 id="app-title">ブラウザで使えるツール</h1>
+        <p>目的のツールを選ぶと、新しい画面で開きます。キーボードでも操作でき、スマートフォンでも読みやすい設計です。</p>
+      </section>
+      <nav class="tool-grid" aria-label="ツール一覧">
+        <a class="tool-card" href="pwgen"><strong>パスワードジェネレーター</strong><span>安全なランダムパスワードを作成</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="uidgen"><strong>UIDジェネレーター</strong><span>UUID形式のIDをすばやく生成</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="qrgen"><strong>QRジェネレーター</strong><span>テキストやURLからQRコードを作成</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="pngedit"><strong>PNG簡易編集</strong><span>色味・明るさ・サイズを調整</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="webrtc"><strong>WebRTC判定</strong><span>お使いのブラウザの対応状況を確認</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="hookdel"><strong>Webhook削除</strong><span>Discord Webhookを安全に削除</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="twmr"><strong>不可視文字除去</strong><span>文章内の見えない文字を検出・削除</span><em aria-hidden="true">開く →</em></a>
+      </nav>
+      <footer class="app-footer"><a href="https://github.com/AiryBubble/OBAKEE/blob/main/LICENSE">MIT License</a> · © AiryBubble</footer>
+    </main>
+  </body>
 </html>

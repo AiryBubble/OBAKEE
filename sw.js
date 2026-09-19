@@ -1,8 +1,10 @@
 const CACHE_NAME = "static-cache-v1";
 const FILES_TO_CACHE = [
+  "/index.html",
   "/style.css",
   "/BIZUDPGothic-Regular.woff2",
   "/favicon.webp",
+  "/Banner.webp",
   "/app/index.html",
   "/app/pwgen/index.html",
   "/app/qrgen/index.html",
