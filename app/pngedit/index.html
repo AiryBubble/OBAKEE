@@ -46,6 +46,7 @@
     </style>
   </head>
   <body>
+    <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
     <div class="controls">
       <input type="file" id="fileInput" accept="image/png" />
     </div>

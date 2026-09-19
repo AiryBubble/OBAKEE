@@ -32,6 +32,7 @@
     </style>
   </head>
   <body>
+    <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
     <h1>生成されたUID: <span id="uid"></span>
     </h1>
     <button onclick="createUID()">生成</button>

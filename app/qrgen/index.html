@@ -37,6 +37,7 @@
     </style>
   </head>
   <body>
+    <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
     <input type="text" id="qrText" placeholder="テキストまたはURLを入力">
     <button id="generate">QRを生成</button>
     <div id="qrcode"></div>
