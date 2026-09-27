@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>パスワードジェネレーター</title>
-    <link rel="stylesheet" href="../tool.css" />
+    <link rel="stylesheet" href="/style.css" />
     <style>
       @font-face {
         font-family: "BIZ UDPGothic";
@@ -92,7 +92,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="tool-page">
     <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
     <div>
       <input id="length" type="number" value="16" min="16" max="256" />

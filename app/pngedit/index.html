@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>PNG簡易編集</title>
-    <link rel="stylesheet" href="../tool.css" />
+    <link rel="stylesheet" href="/style.css" />
     <style>
       @font-face {
         font-family: "BIZ UDPGothic";
@@ -45,7 +45,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="tool-page">
     <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
     <div class="controls">
       <input type="file" id="fileInput" accept="image/png" />
