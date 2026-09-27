@@ -12,8 +12,6 @@ const FILES_TO_CACHE = [
   "/app/qrgen/jquery.js",
   "/app/uidgen/index.html",
   "/app/uidgen/uidgen.js",
-  "/app/discord/index.html",
-  "/app/discord/discord.js",
   "/app/webtools/index.html",
   "/app/webtools/webtools.js",
   "/app/securitytxt/index.html",
