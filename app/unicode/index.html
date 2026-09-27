@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../tool.css">
+    <script src="unicode.js" defer>
+    </script>
+  </head>
+  <body>
+    <a class="back-button" href="../">← ツール一覧</a>
+    <p>入力したテキストはこの端末内で変換されます。装飾 Unicode は検索・読み上げ・表示環境で通常文字と異なる場合があります。</p>
+    <label for="source">テキスト（最大2,000文字）</label>
+    <textarea id="source" rows="5" maxlength="2000" placeholder="変換するテキスト">
+    </textarea>
+    <label for="style">スタイル</label>
+    <select id="style">
+    </select>
+    <label for="output">結果</label>
+    <textarea id="output" rows="5" readonly>
+    </textarea>
+    <button id="copy" type="button">コピー</button>
+    <p id="status" role="status">
+    </p>
+  </body>
+</html>

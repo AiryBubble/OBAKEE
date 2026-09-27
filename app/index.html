@@ -10,18 +10,6 @@
         navigator.serviceWorker.register("/sw.js");
       }
     </script>
-    <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    script-src 'self' 'unsafe-inline';
-    style-src 'self' 'unsafe-inline';
-    img-src 'self' data:;
-    frame-src 'self' blob:;
-    worker-src 'self';
-    manifest-src 'self';
-    connect-src 'self';
-    object-src 'none';
-    base-uri 'self';
-  ">
     <meta name="description" content="軽く安全性の高いWebアプリ | OBAKEE">
     <meta name="viewport" content="width=device-width">
     <meta property="og:site_name" content="OBAKEE APP">
@@ -47,6 +35,11 @@
         <p>目的のツールを選ぶと、新しい画面で開きます。キーボードでも操作でき、スマートフォンでも読みやすい設計です。</p>
       </section>
       <nav class="tool-grid" aria-label="ツール一覧">
+        <a class="tool-card" href="discord"><strong>Discordプロフィール画像</strong><span>アバター・バナー（GIF対応）を表示</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="webtools"><strong>HTML・CSS・JavaScript 整形</strong><span>Beauty / Minify をブラウザー内で実行</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="securitytxt"><strong>セキュリティテキスト生成</strong><span>security.txt・llms.txt・DMARC レコード</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="roulette"><strong>Webルーレット</strong><span>公平な乱数で候補から抽選</span><em aria-hidden="true">開く →</em></a>
+        <a class="tool-card" href="unicode"><strong>Unicode テキスト変換</strong><span>23種類の装飾文字に変換</span><em aria-hidden="true">開く →</em></a>
         <a class="tool-card" href="pwgen"><strong>パスワードジェネレーター</strong><span>安全なランダムパスワードを作成</span><em aria-hidden="true">開く →</em></a>
         <a class="tool-card" href="uidgen"><strong>UIDジェネレーター</strong><span>UUID形式のIDをすばやく生成</span><em aria-hidden="true">開く →</em></a>
         <a class="tool-card" href="qrgen"><strong>QRジェネレーター</strong><span>テキストやURLからQRコードを作成</span><em aria-hidden="true">開く →</em></a>

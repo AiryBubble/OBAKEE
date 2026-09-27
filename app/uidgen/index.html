@@ -6,48 +6,27 @@
     <title>UIDジェネレーター</title>
     <link rel="stylesheet" href="../tool.css" />
     <style>
-      @font-face {
-        font-family: "BIZ UDPGothic";
-        src: local("BIZ UDPGothic Regular"), local("BIZUDPGothic-Regular"), url(/BIZUDPGothic-Regular.woff2) format("woff2");
-        font-style: normal;
-        font-display: swap
-      }
-
-      body {
-        font-family: "BIZ UDPGothic";
-      }
-
-      * {
-        color: #240786
-      }
-
-      button {
-        font-size: 16px;
-        padding: 10px 20px;
-        background: #57e;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer
-      }
+      .uid-tool { max-width: 760px; margin: auto; }
+      .uid-tool label { display:block; margin: 1rem 0 .3rem; font-weight:700; }
+      .uid-tool button { margin-top:1rem; }
+      #results { padding:0; list-style:none; }
+      #results li { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:.7rem 0; padding:.8rem; border-radius:.8rem; background:#e8eef5; overflow-wrap:anywhere; }
+      #results code { font-family:ui-monospace,monospace; }
     </style>
   </head>
   <body>
     <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
-    <h1>生成されたUID: <span id="uid"></span>
-    </h1>
-    <button onclick="createUID()">生成</button>
-    <script>
-      function generateUID() {
-        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
-          var r = crypto.getRandomValues(new Uint8Array(1))[0] & 15;
-          var v = c == 'x' ? r : (r & 3 | 8);
-          return v.toString(16)
-        })
-      }
-
-      function createUID() {
-        document.getElementById("uid").textContent = generateUID()
-      }
-    </script>
+    <main class="uid-tool">
+      <h1>IDジェネレーター</h1>
+      <p>暗号学的に安全な乱数を使って生成します。</p>
+      <label for="id-type">形式</label>
+      <select id="id-type"><option value="uuid">UUID v4</option><option value="ulid">ULID</option><option value="nanoid">NanoID (21文字)</option></select>
+      <label for="id-count">生成数（1〜100）</label>
+      <input id="id-count" type="number" value="1" min="1" max="100" inputmode="numeric">
+      <button id="generate" type="button">生成</button>
+      <ul id="results" aria-live="polite"></ul>
+      <p id="status" role="status"></p>
+    </main>
+    <script src="uidgen.js" defer></script>
   </body>
 </html>

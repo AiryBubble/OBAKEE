@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../tool.css">
+    <script src="securitytxt.js" defer>
+    </script>
+  </head>
+  <body>
+    <a class="back-button" href="../">← ツール一覧</a>
+    <p>入力内容はブラウザー内だけで処理します。生成内容を公開する前に確認してください。</p>
+    <label for="contact">連絡先メールアドレス（security.txt）</label>
+    <input id="contact" type="email" maxlength="254" placeholder="security@example.com">
+    <label for="policy">脆弱性開示ポリシー URL（任意）</label>
+    <input id="policy" type="url" maxlength="2048" placeholder="https://example.com/security-policy">
+    <label for="expires">有効期限</label>
+    <input id="expires" type="date">
+    <button id="generate" type="button">生成</button>
+    <h2>security.txt</h2>
+    <textarea id="security-output" rows="7" readonly>
+    </textarea>
+    <h2>llms.txt</h2>
+    <label for="site-name">サイト名</label>
+    <input id="site-name" maxlength="100" placeholder="Example">
+    <label for="site-url">サイトURL</label>
+    <input id="site-url" type="url" maxlength="2048" placeholder="https://example.com">
+    <button id="llms" type="button">生成</button>
+    <textarea id="llms-output" rows="8" readonly>
+    </textarea>
+    <h2>DMARC レコード</h2>
+    <label for="domain">ドメイン（例: example.com）</label>
+    <input id="domain" maxlength="253" placeholder="example.com">
+    <label for="rua">集計レポート宛先メール（任意）</label>
+    <input id="rua" type="email" maxlength="254" placeholder="dmarc@example.com">
+    <label for="policy-mode">ポリシー</label>
+    <select id="policy-mode">
+      <option value="none">none（監視）</option>
+      <option value="quarantine">quarantine</option>
+      <option value="reject">reject</option>
+    </select>
+    <button id="dmarc" type="button">生成</button>
+    <textarea id="dmarc-output" rows="3" readonly>
+    </textarea>
+    <p role="status" id="status">
+    </p>
+  </body>
+</html>

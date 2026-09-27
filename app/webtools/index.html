@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../tool.css">
+    <script src="webtools.js" defer>
+    </script>
+  </head>
+  <body>
+    <a class="back-button" href="../">← ツール一覧</a>
+    <p>処理はブラウザー内で完了します。JavaScript は安全のため実行しません。</p>
+    <label for="language">形式</label>
+    <select id="language">
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="js">JavaScript</option>
+    </select>
+    <label for="source">入力</label>
+    <textarea id="source" rows="12" maxlength="200000" spellcheck="false" placeholder="コードを貼り付け">
+    </textarea>
+    <p>
+      <button id="beautify">Beauty</button>
+      <button id="minify">Minify</button>
+      <button id="copy">コピー</button>
+    </p>
+    <label for="output">出力</label>
+    <textarea id="output" rows="12" readonly spellcheck="false">
+    </textarea>
+    <p id="status" role="status">
+    </p>
+  </body>
+</html>

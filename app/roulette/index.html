@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../tool.css">
+    <script src="roulette.js" defer>
+    </script>
+  </head>
+  <body>
+    <a class="back-button" href="../">← ツール一覧</a>
+    <p>候補は1行に1つ入力します。抽選は Web Crypto の一様乱数で一度だけ行い、抽選後は結果を固定表示します。</p>
+    <label for="choices">候補（2〜200件、各200文字まで）</label>
+    <textarea id="choices" rows="10" maxlength="40000" placeholder="候補A&#10;候補B&#10;候補C">
+    </textarea>
+    <button id="spin" type="button">抽選</button>
+    <h2 id="result" aria-live="polite">結果はここに表示されます</h2>
+    <p id="status" role="status">
+    </p>
+    <button id="reset" type="button">候補を編集</button>
+  </body>
+</html>

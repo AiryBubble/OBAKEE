@@ -1,4 +1,4 @@
-const CACHE_NAME = "static-cache-v1";
+const CACHE_NAME = "static-cache-v2";
 const FILES_TO_CACHE = [
   "/index.html",
   "/style.css",
@@ -11,6 +11,17 @@ const FILES_TO_CACHE = [
   "/app/qrgen/qrcode.js",
   "/app/qrgen/jquery.js",
   "/app/uidgen/index.html",
+  "/app/uidgen/uidgen.js",
+  "/app/discord/index.html",
+  "/app/discord/discord.js",
+  "/app/webtools/index.html",
+  "/app/webtools/webtools.js",
+  "/app/securitytxt/index.html",
+  "/app/securitytxt/securitytxt.js",
+  "/app/roulette/index.html",
+  "/app/roulette/roulette.js",
+  "/app/unicode/index.html",
+  "/app/unicode/unicode.js",
   "/app/hue/index.html",
   "/app/webrtc/index.html",
   "/app/hookdel/index.html",
