@@ -5,109 +5,26 @@
     <meta name="viewport" content="width=device-width" />
     <title>パスワードジェネレーター</title>
     <link rel="stylesheet" href="/style.css" />
-    <style>
-      @font-face {
-        font-family: "BIZ UDPGothic";
-        src: local("BIZ UDPGothic Regular"), local("BIZUDPGothic-Regular"), url(/BIZUDPGothic-Regular.woff2) format("woff2");
-        font-style: normal;
-        font-display: swap;
-      }
-
-      body {
-        font-family: "BIZ UDPGothic";
-        text-align: center;
-        padding: 20px;
-      }
-
-      input {
-        font-size: 18px;
-        padding: 8px;
-        margin: 10px;
-        width: 300px;
-      }
-
-      #generate-btn {
-        font-size: 16px;
-        padding: 10px 20px;
-        background: #57e;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      * {
-        color: #240786
-      }
-
-      .switch-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin: 15px 0;
-      }
-
-      .switch {
-        position: relative;
-        width: 50px;
-        height: 26px;
-      }
-
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #ccc;
-        border-radius: 26px;
-        transition: .3s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 20px;
-        width: 20px;
-        left: 3px;
-        bottom: 3px;
-        background: white;
-        border-radius: 50%;
-        transition: .3s;
-      }
-
-      input:checked+.slider {
-        background: #57e;
-      }
-
-      input:checked+.slider:before {
-        transform: translateX(24px);
-      }
-    </style>
   </head>
   <body class="tool-page">
     <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
-    <div>
-      <input id="length" type="number" value="16" min="16" max="256" />
-      <br />
+    <h1>パスワードジェネレーター</h1>
+    <p>安全なランダムパスワードを生成します。</p>
+    <section class="password-panel" aria-label="パスワード設定">
+      <label for="length">パスワードの長さ</label>
+      <input id="length" type="number" value="16" min="16" max="256" inputmode="numeric" />
       <div class="switch-wrapper">
-        <span>記号を含める</span>
-        <label class="switch">
+        <span id="symbols-label">記号を含める</span>
+        <label class="switch" aria-labelledby="symbols-label">
           <input id="use-symbols" type="checkbox" checked />
-          <span class="slider"></span>
+          <span class="slider" aria-hidden="true"></span>
         </label>
       </div>
-      <input id="password-output" type="text" readonly placeholder="ここに生成されます" />
-      <br />
-      <button id="generate-btn">パスワードを生成</button>
-    </div>
+      <label for="password-output">生成されたパスワード</label>
+      <input id="password-output" type="text" readonly placeholder="ここに生成されます" autocomplete="off" />
+      <p class="password-hint">パスワード欄をクリックするとコピーできます。</p>
+      <button id="generate-btn" type="button">パスワードを生成</button>
+    </section>
     <script>
       const generateBtn = document.getElementById("generate-btn");
       const output = document.getElementById("password-output");
