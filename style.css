@@ -346,3 +346,121 @@ footer {
     border-radius: 1rem;
   }
 }
+:root {
+  --navy: #173d36;
+  --ink: #202c27;
+  --muted: #52635a;
+  --blue: #176d58;
+  --blue-dark: #0e4f40;
+  --surface: #fffdf5;
+  --page: #f1efdf;
+  --line: #b9c2a5;
+  --focus: #d44f26;
+  --shadow-light: #fffdf5;
+  --shadow-dark: #d2d0bd;
+  --primary: #176d58;
+  --primary-hover: #0e4f40;
+  --danger: #a43d35;
+  --canvas: #fffdf5;
+  --glass: rgba(255, 253, 245, 0.94);
+  --glass-border: #b9c2a5;
+}
+html {
+  background-color: var(--page);
+  background-image: linear-gradient(rgba(23, 61, 54, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 61, 54, 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+a { text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.site-shell, .app-shell { position: relative; }
+.site-header {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #173d36;
+  border-radius: 0.35rem;
+  background: #173d36;
+  box-shadow: 7px 7px 0 #c1c8aa;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.site-header::after {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 2px solid #f2cc55;
+  background: #d44f72;
+  content: "";
+}
+.site-header p { color: #e6edcf; }
+.link-grid { gap: 1rem; }
+.feature-card, .tool-card {
+  border: 1px solid #aab69a;
+  border-radius: 0.35rem;
+  background: #fffdf5;
+  box-shadow: 4px 4px 0 #d2d0bd;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.feature-card:hover, .tool-card:hover {
+  border-color: #176d58;
+  box-shadow: 5px 5px 0 #d2d0bd;
+}
+.card-icon {
+  border: 1px solid #aab69a;
+  border-radius: 0.25rem;
+  background: #f2cc55;
+  color: #173d36;
+  box-shadow: none;
+}
+.notice {
+  border: 1px solid #aab69a;
+  border-radius: 0.35rem;
+  background: #e4e8d5;
+  box-shadow: 4px 4px 0 #d2d0bd;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.notice img { border-radius: 0.15rem; }
+.app-header {
+  border: 1px solid #aab69a;
+  border-radius: 0.35rem;
+  background: #fffdf5;
+  box-shadow: 4px 4px 0 #d2d0bd;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.back-link, .tool-card em { color: var(--blue); }
+.app-intro { border-left: 3px solid #d44f72; padding-left: 1rem; }
+.tool-page input:not([type="checkbox"]):not([type="range"]),
+.tool-page textarea, .tool-page select {
+  border-color: #aab69a;
+  border-radius: 0.25rem;
+  background: #fffdf5;
+  box-shadow: inset 2px 2px 0 #e0dfd0;
+}
+.tool-page button, .tool-page .back-button {
+  border: 1px solid #173d36;
+  border-radius: 0.25rem;
+  background: #f2cc55;
+  color: #173d36;
+  box-shadow: 3px 3px 0 #aab69a;
+}
+.tool-page button:hover:not(:disabled) {
+  background: #f6d96f;
+  transform: translateY(-1px);
+}
+.password-panel, .tool-page #result, .tool-page .warning-box, .tool-page .risk-banner,
+.tool-page .detection-section, .tool-page .webhook-preview {
+  border: 1px solid #aab69a;
+  border-left: 4px solid var(--primary);
+  border-radius: 0.35rem;
+  background: #fffdf5;
+  box-shadow: 4px 4px 0 #d2d0bd;
+}
+.tool-page .danger, .tool-page .btn-danger { background: #f4e2dc; }
+.tool-page .success { background: #e2eadb; }
+@media (max-width: 760px) {
+  .site-header { box-shadow: 4px 4px 0 #c1c8aa; }
+  .link-grid { gap: 0.8rem; }
+}
