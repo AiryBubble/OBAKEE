@@ -92,26 +92,27 @@
         var file = fileInput.files[0];
         if (!file) return;
         var currentSequence = ++loadSequence;
-        if (file.type !== "image/png" && !/\.png$/i.test(file.name)) {
+        if (file.type && file.type !== "image/png" && !/\.png$/i.test(file.name)) {
           status.textContent = "PNG形式の画像を選択してください。";
           return;
         }
         status.textContent = "画像を読み込んでいます…";
         downloadBtn.disabled = true;
         var url = URL.createObjectURL(file);
-        img = new Image();
-        img.onload = function() {
+        var image = new Image();
+        img = image;
+        image.onload = function() {
           URL.revokeObjectURL(url);
           if (currentSequence !== loadSequence) return;
-          if (!img.naturalWidth || !img.naturalHeight) {
+          if (!image.naturalWidth || !image.naturalHeight) {
             status.textContent = "画像を読み込めませんでした。別のPNGをお試しください。";
             return;
           }
-          canvas.width = img.width;
-          canvas.height = img.height;
-          originalWidth = img.width;
-          originalHeight = img.height;
-          ctx.drawImage(img, 0, 0);
+          canvas.width = image.naturalWidth;
+          canvas.height = image.naturalHeight;
+          originalWidth = image.naturalWidth;
+          originalHeight = image.naturalHeight;
+          ctx.drawImage(image, 0, 0);
           try {
             originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             downloadBtn.disabled = false;
@@ -122,13 +123,13 @@
             status.textContent = "画像が大きすぎるため編集できません。小さい画像をお試しください。";
           }
         };
-        img.onerror = function() {
+        image.onerror = function() {
           URL.revokeObjectURL(url);
           if (currentSequence !== loadSequence) return;
           originalImageData = null;
           status.textContent = "画像を読み込めませんでした。PNG形式を確認してください。";
         };
-        img.src = url;
+        image.src = url;
       });
 
       function rgbToHsl(r, g, b) {

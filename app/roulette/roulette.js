@@ -48,22 +48,32 @@ function spinWheel() {
     ? "前回の当選項目を除いて抽選しています。"
     : "ルーレットを回しています。";
 
-  const winner = choices[unbiasedIndex(choices.length)];
+  const winnerIndex = unbiasedIndex(choices.length);
+  const winner = choices[winnerIndex];
   const slice = 360 / choices.length;
-  const target = 360 - (unbiasedIndex(choices.length) + 0.5) * slice;
-  const current = ((rotation % 360) + 360) % 360;
-  const delta = ((target - current) % 360 + 360) % 360;
-  rotation += 360 * 6 + delta;
+  const target = 360 - (winnerIndex + 0.5) * slice;
+  rotation += 360 * 6 + target;
   wheel.classList.add("spinning");
+  wheel.style.transform = `rotate(${rotation - 360 * 6 - target}deg)`;
+  void wheel.offsetWidth;
   wheel.style.transform = `rotate(${rotation}deg)`;
 
-  window.setTimeout(() => {
+  let settled = false;
+  const finishSpin = () => {
+    if (settled) return;
+    settled = true;
+    wheel.removeEventListener("transitionend", onTransitionEnd);
     lastWinner = winner;
     result.textContent = winner;
     status.textContent = "抽選結果を確定しました。もう一度回せます。";
     spin.disabled = false;
     spinning = false;
-  }, 4100);
+  };
+  const onTransitionEnd = (event) => {
+    if (event.target === wheel && event.propertyName === "transform") finishSpin();
+  };
+  wheel.addEventListener("transitionend", onTransitionEnd);
+  window.setTimeout(finishSpin, 4500);
 }
 
 spin.addEventListener("click", spinWheel);
