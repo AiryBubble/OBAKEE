@@ -23,6 +23,8 @@
 
       canvas {
         display: block;
+        max-width: 100%;
+        height: auto;
         border: 1px solid #ccc;
         margin-top: 10px
       }
@@ -49,6 +51,7 @@
     <button class="back-button" type="button" onclick="history.length > 1 ? history.back() : location.assign('../')">← 前のページに戻る</button>
     <div class="controls">
       <input type="file" id="fileInput" accept="image/png" />
+      <p id="status" role="status" aria-live="polite">PNG画像を選択してください。</p>
     </div>
     <div class="controls">
       <label> Hue: <input type="range" id="hueSlider" min="0" max="360" value="0" />
@@ -79,26 +82,53 @@
       var downloadBtn = document.getElementById("downloadBtn");
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
+      var status = document.getElementById("status");
       var originalImageData = null;
       var originalWidth = 0;
       var originalHeight = 0;
       var img = new Image();
+      var loadSequence = 0;
       fileInput.addEventListener("change", function() {
         var file = fileInput.files[0];
         if (!file) return;
+        var currentSequence = ++loadSequence;
+        if (file.type !== "image/png" && !/\.png$/i.test(file.name)) {
+          status.textContent = "PNG形式の画像を選択してください。";
+          return;
+        }
+        status.textContent = "画像を読み込んでいます…";
+        downloadBtn.disabled = true;
         var url = URL.createObjectURL(file);
         img = new Image();
         img.onload = function() {
+          URL.revokeObjectURL(url);
+          if (currentSequence !== loadSequence) return;
+          if (!img.naturalWidth || !img.naturalHeight) {
+            status.textContent = "画像を読み込めませんでした。別のPNGをお試しください。";
+            return;
+          }
           canvas.width = img.width;
           canvas.height = img.height;
           originalWidth = img.width;
           originalHeight = img.height;
           ctx.drawImage(img, 0, 0);
-          originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          downloadBtn.disabled = !1;
-          applyChanges()
+          try {
+            originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            downloadBtn.disabled = false;
+            status.textContent = "画像を読み込みました。";
+            applyChanges();
+          } catch (error) {
+            originalImageData = null;
+            status.textContent = "画像が大きすぎるため編集できません。小さい画像をお試しください。";
+          }
         };
-        img.src = url
+        img.onerror = function() {
+          URL.revokeObjectURL(url);
+          if (currentSequence !== loadSequence) return;
+          originalImageData = null;
+          status.textContent = "画像を読み込めませんでした。PNG形式を確認してください。";
+        };
+        img.src = url;
       });
 
       function rgbToHsl(r, g, b) {
@@ -156,8 +186,13 @@
         var hueRotate = parseFloat(hueSlider.value);
         var brightness = parseFloat(brightnessSlider.value) / 100;
         var scale = parseFloat(scaleSlider.value) / 100;
-        var newWidth = Math.floor(originalWidth * scale);
-        var newHeight = Math.floor(originalHeight * scale);
+        var newWidth = Math.max(1, Math.floor(originalWidth * scale));
+        var newHeight = Math.max(1, Math.floor(originalHeight * scale));
+        if (newWidth > 16384 || newHeight > 16384 || newWidth * newHeight > 67108864) {
+          status.textContent = "拡大後の画像が大きすぎます。縮小してお試しください。";
+          downloadBtn.disabled = true;
+          return;
+        }
         canvas.width = newWidth;
         canvas.height = newHeight;
         var imageData = new ImageData(new Uint8ClampedArray(originalImageData.data), originalImageData.width, originalImageData.height);
@@ -184,7 +219,9 @@
         tempCanvas.height = originalHeight;
         tempCtx.putImageData(imageData, 0, 0);
         ctx.imageSmoothingEnabled = !1;
-        ctx.drawImage(tempCanvas, 0, 0, newWidth, newHeight)
+        ctx.drawImage(tempCanvas, 0, 0, newWidth, newHeight);
+        downloadBtn.disabled = false;
+        status.textContent = "編集しました。PNGをダウンロードできます。";
       }
       hueSlider.addEventListener("input", function() {
         hueNumber.value = hueSlider.value;
@@ -214,14 +251,19 @@
       });
       scaleNumber.addEventListener("input", function() {
         var v = parseInt(scaleNumber.value, 10);
-        if (isNaN(v)) v = 100;
-        v = Math.max(10, Math.min(300, v));
+        if (isNaN(v)) return;
+        v = Math.max(10, Math.min(1000, v));
+        scaleNumber.value = v;
         scaleSlider.value = v;
         applyChanges()
       });
       downloadBtn.addEventListener("click", function() {
+        if (!canvas.width || !canvas.height) return;
         canvas.toBlob(function(blob) {
-          if (!blob) return;
+          if (!blob) {
+            status.textContent = "PNGを書き出せませんでした。編集後の画像サイズを確認してください。";
+            return;
+          }
           var url = URL.createObjectURL(blob);
           var a = document.createElement("a");
           a.href = url;
@@ -229,8 +271,9 @@
           document.body.appendChild(a);
           a.click();
           a.remove();
-          URL.revokeObjectURL(url)
-        }, "image/png")
+          window.setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+          status.textContent = "PNGをダウンロードしました。";
+        }, "image/png");
       });
     </script>
   </body>

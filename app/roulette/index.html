@@ -4,18 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="/style.css">
+    <style>
+      .roulette-stage { position: relative; width: min(82vw, 22rem); aspect-ratio: 1; margin: 1.5rem auto; }
+      .roulette-wheel { position: absolute; inset: 0; overflow: hidden; border: .5rem solid #fff; border-radius: 50%; background: conic-gradient(#386fae 0 45deg, #e5edf6 45deg 90deg, #7659a8 90deg 135deg, #f3c56b 135deg 180deg, #41876a 180deg 225deg, #e98f68 225deg 270deg, #577bb1 270deg 315deg, #d66b83 315deg 360deg); box-shadow: 7px 7px 16px #c7d0dc, -7px -7px 16px #fff; transform: rotate(0deg); }
+      .roulette-wheel::after { position: absolute; inset: 42%; border: .25rem solid #fff; border-radius: 50%; background: #263c58; content: ""; }
+      .roulette-wheel.spinning { transition: transform 4s cubic-bezier(.12,.72,.12,1); }
+      .roulette-pointer { position: absolute; z-index: 1; top: -.35rem; left: 50%; width: 0; height: 0; transform: translateX(-50%); border-right: .85rem solid transparent; border-left: .85rem solid transparent; border-top: 1.5rem solid #ae4444; filter: drop-shadow(0 2px 2px #667990); }
+      #spin { display: block; margin: 1rem auto; }
+      #result { min-height: 3rem; padding: .75rem 1rem; text-align: center; overflow-wrap: anywhere; }
+      @media (prefers-reduced-motion: reduce) { .roulette-wheel.spinning { transition-duration: .01ms; } }
+    </style>
     <script src="roulette.js" defer>
     </script>
   </head>
   <body class="tool-page">
     <a class="back-button" href="../">← ツール一覧</a>
-    <p>候補は1行に1つ入力します。抽選は Web Crypto の一様乱数で一度だけ行い、抽選後は結果を固定表示します。</p>
+    <p>候補は1行に1つ入力します。ルーレットは Web Crypto の一様乱数で抽選します。</p>
     <label for="choices">候補（2〜200件、各200文字まで）</label>
     <textarea id="choices" rows="10" maxlength="40000" placeholder="候補A&#10;候補B&#10;候補C">
     </textarea>
-    <button id="spin" type="button">抽選</button>
+    <div class="switch-wrapper">
+      <span id="remove-winner-label">当選した選択肢を次回の候補から除外</span>
+      <label class="switch" aria-label="当選した選択肢を次回の候補から除外">
+        <input id="removeWinner" type="checkbox" aria-labelledby="remove-winner-label">
+        <span class="slider" aria-hidden="true"></span>
+      </label>
+    </div>
+    <div class="roulette-stage" aria-label="抽選ルーレット">
+      <div id="wheel" class="roulette-wheel" aria-hidden="true"></div>
+      <div class="roulette-pointer" aria-hidden="true"></div>
+    </div>
+    <button id="spin" type="button">ルーレットを回す</button>
     <h2 id="result" aria-live="polite">結果はここに表示されます</h2>
-    <p id="status" role="status">
+    <p id="status" role="status" aria-live="polite">
     </p>
     <button id="reset" type="button">候補を編集</button>
   </body>

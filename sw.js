@@ -1,9 +1,13 @@
-const CACHE_NAME = "static-cache-v2";
+const CACHE_NAME = "static-cache-v3";
 const FILES_TO_CACHE = [
   "/index.html",
   "/style.css",
   "/BIZUDPGothic-Regular.woff2",
   "/favicon.webp",
+  "/icons/apple-touch-icon.png",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/maskable-512.png",
   "/Banner.webp",
   "/app/index.html",
   "/app/pwgen/index.html",
@@ -21,6 +25,7 @@ const FILES_TO_CACHE = [
   "/app/unicode/index.html",
   "/app/unicode/unicode.js",
   "/app/hue/index.html",
+  "/app/pngedit/index.html",
   "/app/webrtc/index.html",
   "/app/hookdel/index.html",
   "/app/twmr/index.html"
