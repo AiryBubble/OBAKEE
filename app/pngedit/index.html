@@ -82,7 +82,7 @@
       var downloadBtn = document.getElementById("downloadBtn");
       var canvas = document.getElementById("canvas");
       var ctx = canvas.getContext("2d");
-      var status = document.getElementById("status");
+      var statusElement = document.getElementById("status");
       var originalImageData = null;
       var originalWidth = 0;
       var originalHeight = 0;
@@ -93,10 +93,10 @@
         if (!file) return;
         var currentSequence = ++loadSequence;
         if (file.type && file.type !== "image/png" && !/\.png$/i.test(file.name)) {
-          status.textContent = "PNG形式の画像を選択してください。";
+          statusElement.textContent = "PNG形式の画像を選択してください。";
           return;
         }
-        status.textContent = "画像を読み込んでいます…";
+        statusElement.textContent = "画像を読み込んでいます…";
         downloadBtn.disabled = true;
         var url = URL.createObjectURL(file);
         var image = new Image();
@@ -105,7 +105,7 @@
           URL.revokeObjectURL(url);
           if (currentSequence !== loadSequence) return;
           if (!image.naturalWidth || !image.naturalHeight) {
-            status.textContent = "画像を読み込めませんでした。別のPNGをお試しください。";
+            statusElement.textContent = "画像を読み込めませんでした。別のPNGをお試しください。";
             return;
           }
           canvas.width = image.naturalWidth;
@@ -116,18 +116,18 @@
           try {
             originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             downloadBtn.disabled = false;
-            status.textContent = "画像を読み込みました。";
+            statusElement.textContent = "画像を読み込みました。";
             applyChanges();
           } catch (error) {
             originalImageData = null;
-            status.textContent = "画像が大きすぎるため編集できません。小さい画像をお試しください。";
+            statusElement.textContent = "画像が大きすぎるため編集できません。小さい画像をお試しください。";
           }
         };
         image.onerror = function() {
           URL.revokeObjectURL(url);
           if (currentSequence !== loadSequence) return;
           originalImageData = null;
-          status.textContent = "画像を読み込めませんでした。PNG形式を確認してください。";
+          statusElement.textContent = "画像を読み込めませんでした。PNG形式を確認してください。";
         };
         image.src = url;
       });
@@ -190,7 +190,7 @@
         var newWidth = Math.max(1, Math.floor(originalWidth * scale));
         var newHeight = Math.max(1, Math.floor(originalHeight * scale));
         if (newWidth > 16384 || newHeight > 16384 || newWidth * newHeight > 67108864) {
-          status.textContent = "拡大後の画像が大きすぎます。縮小してお試しください。";
+          statusElement.textContent = "拡大後の画像が大きすぎます。縮小してお試しください。";
           downloadBtn.disabled = true;
           return;
         }
@@ -222,7 +222,7 @@
         ctx.imageSmoothingEnabled = !1;
         ctx.drawImage(tempCanvas, 0, 0, newWidth, newHeight);
         downloadBtn.disabled = false;
-        status.textContent = "編集しました。PNGをダウンロードできます。";
+        statusElement.textContent = "編集しました。PNGをダウンロードできます。";
       }
       hueSlider.addEventListener("input", function() {
         hueNumber.value = hueSlider.value;
@@ -262,7 +262,7 @@
         if (!canvas.width || !canvas.height) return;
         canvas.toBlob(function(blob) {
           if (!blob) {
-            status.textContent = "PNGを書き出せませんでした。編集後の画像サイズを確認してください。";
+            statusElement.textContent = "PNGを書き出せませんでした。編集後の画像サイズを確認してください。";
             return;
           }
           var url = URL.createObjectURL(blob);
@@ -273,7 +273,7 @@
           a.click();
           a.remove();
           window.setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
-          status.textContent = "PNGをダウンロードしました。";
+          statusElement.textContent = "PNGをダウンロードしました。";
         }, "image/png");
       });
     </script>

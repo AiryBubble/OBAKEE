@@ -337,7 +337,7 @@
               updateButtons(false);
             }
           } catch (error) {
-            showResult('ネットワークエラー: ' + (error.message || '不明なエラー') + '。存在確認できませんでした。', 'ng');
+            showResult('ブラウザーのCSP/CORS制限またはネットワークにより確認できませんでした。Webhook APIへのブラウザー直接通信はDiscord側のCORS許可が必要です。', 'ng');
             hidePreview();
             updateButtons(false);
           } finally {
@@ -381,7 +381,7 @@
               showResult('削除に失敗しました (HTTP ' + response.status + '): ' + (text || '理由不明'), 'ng');
             }
           } catch (error) {
-            showResult('ネットワークエラー: ' + (error.message || '不明なエラー'), 'ng');
+            showResult('ブラウザーのCSP/CORS制限またはネットワークにより削除できませんでした。Webhook APIへのブラウザー直接通信はDiscord側のCORS許可が必要です。', 'ng');
           } finally {
             isDeleting = false;
             deleteBtn.innerHTML = '削除';
