@@ -1,4 +1,4 @@
-const CACHE_NAME = "static-cache-v4";
+const CACHE_NAME = "static-cache-v5";
 const FILES_TO_CACHE = [
   "/index.html",
   "/style.css",
@@ -52,9 +52,17 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  const requestUrl = new URL(event.request.url);
+  if (event.request.method !== "GET" || requestUrl.origin !== self.location.origin) return;
+
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+    caches.match(event.request).then(async (response) => {
+      if (response) return response;
+      try {
+        return await fetch(event.request);
+      } catch (error) {
+        return new Response("Offline", { status: 503, statusText: "Offline" });
+      }
     })
   );
 });
